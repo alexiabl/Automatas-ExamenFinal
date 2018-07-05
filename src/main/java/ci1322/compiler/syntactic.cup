@@ -1,0 +1,127 @@
+package ci1322.compiler;
+
+import java.util.LinkedList;
+import java_cup.runtime.Symbol;
+import ci1322.compiler.TError;
+import ci1322.compiler.structure.declaration.*;
+import ci1322.compiler.structure.function.*;
+import ci1322.compiler.structure.instructions.*;
+import ci1322.compiler.structure.*;
+import java.util.List;
+import java.util.LinkedList;
+
+parser code {:
+    public LinkedList<TError> syntacticErrors = new LinkedList<TError>();
+
+    public void syntaxError(Symbol s){
+        String token = s.value.toString();
+        int line = s.right;
+        int col = s.left;
+
+        System.out.println("-- Syntactic Error --");
+        System.out.println("\tToken: "+token);
+        System.out.println("\tLine: "+line);
+        System.out.println("\tColumn: "+line);
+
+        TError error = new TError(token,"Error","Unexpected token",line,col);
+        syntacticErrors.add(error);
+        }
+
+:}
+
+//Actions
+
+
+// Terminales
+
+terminal FOR, FUNCTION, READ, ARRAY, RETURN;
+terminal COMMA, EQUALS, LEFTPAR, RIGHTPAR, LEFTBRACKET, RIGHTBRACKET,INT_TYPE, EOS, LESS_THAN, LEFTSQ, RIGHTSQ;
+terminal String N_VAR;
+terminal Integer NUM;
+terminal PRINT;
+
+// No terminales
+nonterminal FunctionBlock block_func;
+nonterminal Function function_vars;
+nonterminal LinkedList<DeclVar> decl_Vars;
+nonterminal Assignment assign_Vars;
+nonterminal For for;
+nonterminal Item item;
+nonterminal List<Instruction> instructions;
+nonterminal Read read;
+nonterminal Print print;
+nonterminal Call call;
+nonterminal Assignment multiVars;
+nonterminal Return return;
+nonterminal Container main;
+
+//Reglas
+//como mandar la lista de variable
+//error si el numero en el metodo es diferente al numero de variables
+//validacion de existencia de variables
+//donde se solicita al usuario
+
+
+main::= function_vars:f main:m {: m.addToFunctions(f);
+                                  RESULT = m; :}
+        | function_vars:f {: Container cont = new Container();
+                             cont.addToFunctions(f);
+                              RESULT = cont; :};
+
+function_vars::= FUNCTION ARRAY N_VAR:n LEFTPAR N_VAR:p RIGHTPAR LEFTBRACKET block_func:b RIGHTBRACKET {: RESULT = new Function(TypesEnum.ARRAY,n,p,b.getDeclarations(),b.getInstructions()); :}
+                 | FUNCTION N_VAR:n LEFTPAR RIGHTPAR LEFTBRACKET block_func:b RIGHTBRACKET {: RESULT = new Function(n,b.getDeclarations(),b.getInstructions()); :};
+
+item::= N_VAR:n {: RESULT = new Item<String>(n); :}
+       | NUM:n {: RESULT = new Item<Integer>(n); :};
+
+for::= FOR LEFTPAR item:min LESS_THAN item:max RIGHTPAR LEFTBRACKET instructions:i RIGHTBRACKET {: RESULT = new For(min,max,i); :};
+
+instructions::= for:f instructions:i {: i.add(f);
+                                         RESULT = i; :}
+                | assign_Vars:a instructions:i {: i.add(a);
+                                                 RESULT = i; :}
+                | read:r instructions:i {: i.add(r);
+                                         RESULT = i; :}
+                | print:p instructions:i {: i.add(p);
+                                            RESULT = i; :}
+                | for:f {: RESULT = new LinkedList<Instruction>();
+                           RESULT.add(f); :}
+                | assign_Vars:a {: RESULT = new LinkedList<Instruction>();
+                                   RESULT.add(a); :}
+                | read:r {: RESULT = new LinkedList<Instruction>();
+                          RESULT.add(r); :}
+                | print:p {: RESULT = new LinkedList<Instruction>();
+                            RESULT.add(p); :};
+
+assign_Vars::= multiVars:m EQUALS NUM:i EOS {: RESULT = new DirectAssignment(i,m.getIdentifiers()); :}
+               | multiVars:m EQUALS call:c EOS {: RESULT = new Call(c.getName(),c.getParam()); :};
+
+multiVars::= N_VAR:n COMMA multiVars:m {: m.addToIdentifiers(n);
+                                          RESULT = m;  :}
+            | N_VAR:n {: RESULT = new Call();
+                        RESULT.addToIdentifiers(n); :};
+
+read::= READ N_VAR:n EOS {: RESULT = new Read(n); :};
+
+print::= PRINT item:i EOS {: RESULT = new Print(i); :};
+
+call::= N_VAR:n LEFTPAR NUM:p RIGHTPAR {: RESULT = new Call(n,p); :} ;
+
+decl_Vars::= ARRAY:a LEFTSQ NUM:s RIGHTSQ N_VAR:n EOS decl_Vars:d {: DeclVar decl = new DeclVar(TypesEnum.ARRAY,n,s);
+                                                                     d.add(decl);
+                                                                     RESULT = d; :}
+            | INT_TYPE:a N_VAR:n EOS decl_Vars:d {: DeclVar decl = new DeclVar(TypesEnum.INT,n);
+                                                    d.add(decl);
+                                                     RESULT = d; :}
+            | ARRAY LEFTSQ NUM:s RIGHTSQ N_VAR:n EOS {: DeclVar decl = new DeclVar(TypesEnum.ARRAY,n,s);
+                                                    LinkedList<DeclVar> declVarLinkedList = new LinkedList<DeclVar>();
+                                                    declVarLinkedList.add(decl);
+                                                    RESULT = declVarLinkedList; :}
+            | INT_TYPE N_VAR:n EOS {: DeclVar decl =new DeclVar(TypesEnum.INT,n);
+                                       LinkedList<DeclVar> declVarLinkedList = new LinkedList<DeclVar>();
+                                       declVarLinkedList.add(decl);
+                                      RESULT = declVarLinkedList; :};
+
+block_func::= decl_Vars:d instructions:i {: RESULT = new FunctionBlock(d,i); :};
+
+return::= RETURN item:i EOS {: RESULT = new Return(i); :};

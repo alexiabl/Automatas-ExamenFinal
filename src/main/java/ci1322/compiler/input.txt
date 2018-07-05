@@ -1,0 +1,65 @@
+function Array getVars (num) {
+    Array[num] vars;
+    int i;
+    i=0;
+
+    for (i < num) {
+        read vars[i];
+    }
+    return vars;
+}
+
+function printVars1 () {
+    var ornitorrinco;
+
+ornitorrinco = getVars (1);
+print ornitorrinco;
+}
+
+function printVars2 () {
+    var ornitorrinco;
+    var orden_66;
+
+ornitorrinco, orden_66 = getVars (2);
+print ornitorrinco;
+print orden_66;
+
+}
+
+function printVars3 () {
+    var ornitorrinco;
+    var orden_66;
+    var es42;
+
+ornitorrinco, orden_66, es42 = getVars (3);
+print es42;
+print ornitorrinco;
+print orden_66;
+}
+
+function printVars4 () {
+    var ornitorrinco;
+    var orden_66;
+    var es42;
+    var perro;
+
+ornitorrinco, orden_66, es42, perro = getVars (4);
+print es42;
+print ornitorrinco;
+print orden_66;
+}
+
+function printVars5 () {
+    var ornitorrinco;
+    var orden_66;
+    var es42;
+    var perro;
+    var gato;
+
+ornitorrinco, orden_66, es42, perro, gato = getVars (4);
+print es42;
+print ornitorrinco;
+print orden_66;
+print perro;
+print gato;
+}

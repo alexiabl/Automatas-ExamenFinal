@@ -1,0 +1,4 @@
+jflex tokens.jflex
+java -jar java-cup-11b.jar syntactic.cup
+javac -cp .:java-cup-11b-runtime.jar Main.java
+java -cp .:java-cup-11b.jar Main input.txt
