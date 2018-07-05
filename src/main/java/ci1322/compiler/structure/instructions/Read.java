@@ -1,5 +1,7 @@
 package ci1322.compiler.structure.instructions;
 
+import ci1322.compiler.structure.SymbolsTable;
+
 /**
  * Created by alexiaborchgrevink on 7/4/18.
  */
@@ -21,5 +23,9 @@ public class Read implements Instruction{
 
     public void setVariable(String variable) {
         this.variable = variable;
+    }
+
+    public void checkSymbolTable(SymbolsTable s) {
+        s.findVariableTable(variable);
     }
 }

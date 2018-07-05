@@ -6,6 +6,7 @@ import ci1322.compiler.structure.declaration.DeclVar;
 import ci1322.compiler.structure.declaration.TypesEnum;
 import ci1322.compiler.structure.instructions.Instruction;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,16 +17,15 @@ public class Function implements Symbols{
     private List<DeclVar> declarations;
     private List<Instruction> instructions;
     private String name;
-    private String param;
+    private int param;
     private TypesEnum returnType;
     private SymbolsTable localSymbols;
-    //tabla de simbolos local, llenar la tabla y despues borrarla
 
     public Function(){
         this.localSymbols = new SymbolsTable();
     }
 
-    public Function(TypesEnum returnType, String name, String param,List<DeclVar> decls, List<Instruction> ins){
+    public Function(TypesEnum returnType, String name, int param, List<DeclVar> decls, List<Instruction> ins) {
         this.returnType = returnType;
         this.name = name;
         this.param=param;
@@ -65,11 +65,11 @@ public class Function implements Symbols{
         this.name = name;
     }
 
-    public String getParam() {
+    public int getParam() {
         return param;
     }
 
-    public void setParam(String param) {
+    public void setParam(int param) {
         this.param = param;
     }
 
@@ -88,7 +88,6 @@ public class Function implements Symbols{
     public void setLocalSymbols(SymbolsTable localSymbols) {
         this.localSymbols = localSymbols;
     }
-
 
 
 

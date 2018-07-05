@@ -8,7 +8,6 @@ import java_cup.runtime.*;
 %class Lexer
 %line
 %column
-
 %{
 
     private Symbol symbols(int type) {
@@ -48,6 +47,7 @@ RETURN = "return"
 PRINT = "print"
 LINES  = \r|\n|\r\n
 WHITESPACE = {LINES} | [ \t\f]
+CLASS_BLOCK = "class"
 
 
 %%
@@ -96,6 +96,16 @@ WHITESPACE = {LINES} | [ \t\f]
 {LESS_THAN} {
         System.out.println("Found match LESS_THAN "+yytext()+" at line "+yyline+", column"+yycolumn);
           return symbols(sym.LESS_THAN);
+    }
+
+{CLASS_BLOCK} {
+    System.out.println("Found match CLASS_BLOCK "+yytext()+" at line "+yyline+", column"+yycolumn);
+              return symbols(sym.CLASS_BLOCK);
+    }
+
+{PRINT} {
+        System.out.println("Found match PRINT "+yytext()+" at line "+yyline+", column"+yycolumn);
+          return symbols(sym.PRINT);
     }
 
 {READ} {

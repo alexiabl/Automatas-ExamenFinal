@@ -35,13 +35,13 @@ class Lexer implements java_cup.runtime.Scanner {
   /** 
    * Translates characters to character classes
    */
-  private static final String ZZ_CMAP_PACKED = 
-    "\11\0\1\36\1\35\1\0\1\36\1\34\22\0\1\36\7\0\1\10"+
+  private static final String ZZ_CMAP_PACKED =
+          "\11\0\1\37\1\36\1\0\1\37\1\35\22\0\1\37\7\0\1\10" +
     "\1\11\2\0\1\6\1\1\2\0\12\2\1\0\1\25\1\5\1\7"+
     "\3\0\1\32\31\3\1\12\1\0\1\13\1\0\1\4\1\0\1\30"+
-    "\1\3\1\21\1\31\1\27\1\16\2\3\1\23\4\3\1\20\1\24"+
-    "\1\3\1\3\1\26\1\3\1\22\1\17\3\3\1\33\1\3\1\14"+
-    "\1\0\1\15\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uff92\0";
+                  "\1\3\1\21\1\31\1\27\1\16\2\3\1\23\2\3\1\40\1\3" +
+                  "\1\20\1\24\1\34\1\3\1\26\1\41\1\22\1\17\3\3\1\33" +
+                  "\1\3\1\14\1\0\1\15\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uff92\0";
 
   /** 
    * Translates characters to character classes
@@ -55,12 +55,12 @@ class Lexer implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\2\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7"+
-    "\1\10\1\11\1\12\1\13\2\2\1\14\2\2\2\15"+
-    "\1\0\6\2\1\16\1\17\5\2\1\20\3\2\1\21"+
-    "\1\2\1\22\1\2\1\23";
+            "\1\10\1\11\1\12\1\13\3\2\1\14\3\2\2\15" +
+            "\1\0\10\2\1\16\1\2\1\17\7\2\1\20\3\2" +
+            "\1\21\1\2\1\22\1\23\1\2\1\24\1\2\1\25";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[43];
+    int[] result = new int[53];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -85,15 +85,16 @@ class Lexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\37\0\37\0\76\0\135\0\135\0\135\0\135"+
-    "\0\135\0\135\0\135\0\135\0\135\0\174\0\233\0\135"+
-    "\0\272\0\331\0\370\0\135\0\76\0\u0117\0\u0136\0\u0155"+
-    "\0\u0174\0\u0193\0\u01b2\0\76\0\76\0\u01d1\0\u01f0\0\u020f"+
-    "\0\u022e\0\u024d\0\76\0\u026c\0\u028b\0\u02aa\0\76\0\u02c9"+
-    "\0\76\0\u02e8\0\76";
+          "\0\0\0\42\0\42\0\104\0\146\0\146\0\146\0\146" +
+                  "\0\146\0\146\0\146\0\146\0\146\0\210\0\252\0\314" +
+                  "\0\146\0\356\0\u0110\0\u0132\0\u0154\0\146\0\104\0\u0176" +
+                  "\0\u0198\0\u01ba\0\u01dc\0\u01fe\0\u0220\0\u0242\0\u0264\0\104" +
+                  "\0\u0286\0\104\0\u02a8\0\u02ca\0\u02ec\0\u030e\0\u0330\0\u0352" +
+                  "\0\u0374\0\104\0\u0396\0\u03b8\0\u03da\0\104\0\u03fc\0\104" +
+                  "\0\104\0\u041e\0\104\0\u0440\0\104";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[43];
+    int[] result = new int[53];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -117,35 +118,51 @@ class Lexer implements java_cup.runtime.Scanner {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\0\1\2\1\3\1\4\1\0\1\5\1\6\1\7"+
-    "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\4\4"+
-    "\1\17\1\4\1\20\1\21\3\4\1\22\1\4\1\23"+
-    "\2\24\2\0\1\3\36\0\2\4\1\25\11\0\7\4"+
-    "\1\0\6\4\44\0\2\4\1\25\11\0\1\4\1\26"+
-    "\4\4\1\27\1\0\6\4\5\0\2\4\1\25\11\0"+
-    "\2\4\1\30\4\4\1\0\6\4\5\0\2\4\1\25"+
-    "\11\0\7\4\1\0\1\4\1\31\4\4\5\0\2\4"+
-    "\1\25\11\0\7\4\1\0\1\32\5\4\40\0\1\24"+
-    "\3\0\2\4\1\25\11\0\2\4\1\33\4\4\1\0"+
-    "\6\4\5\0\2\4\1\25\11\0\7\4\1\0\1\34"+
-    "\5\4\5\0\2\4\1\25\11\0\4\4\1\35\2\4"+
-    "\1\0\6\4\5\0\2\4\1\25\11\0\4\4\1\36"+
-    "\2\4\1\0\2\4\1\37\3\4\5\0\2\4\1\25"+
-    "\11\0\7\4\1\0\1\40\5\4\5\0\2\4\1\25"+
-    "\11\0\3\4\1\41\3\4\1\0\6\4\5\0\2\4"+
-    "\1\25\11\0\1\4\1\42\5\4\1\0\6\4\5\0"+
-    "\2\4\1\25\11\0\7\4\1\0\3\4\1\43\2\4"+
-    "\5\0\2\4\1\25\11\0\7\4\1\0\2\4\1\44"+
-    "\3\4\5\0\2\4\1\25\11\0\4\4\1\45\2\4"+
-    "\1\0\6\4\5\0\2\4\1\25\11\0\7\4\1\0"+
-    "\1\46\5\4\5\0\2\4\1\25\11\0\7\4\1\0"+
-    "\5\4\1\47\5\0\2\4\1\25\11\0\5\4\1\50"+
-    "\1\4\1\0\6\4\5\0\2\4\1\25\11\0\2\4"+
-    "\1\51\4\4\1\0\6\4\5\0\2\4\1\25\11\0"+
-    "\6\4\1\52\1\0\6\4\5\0\2\4\1\25\11\0"+
-    "\2\4\1\53\4\4\1\0\6\4\3\0";
+            "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\2\4" +
+            "\1\17\1\4\1\20\1\4\1\21\1\22\3\4\1\23" +
+            "\1\4\1\24\1\25\2\26\2\4\2\0\1\3\41\0" +
+            "\2\4\1\27\11\0\7\4\1\0\7\4\3\0\2\4" +
+            "\44\0\2\4\1\27\11\0\1\4\1\30\4\4\1\31" +
+            "\1\0\7\4\3\0\2\4\2\0\2\4\1\27\11\0" +
+            "\7\4\1\0\7\4\3\0\1\32\1\4\2\0\2\4" +
+            "\1\27\11\0\2\4\1\33\4\4\1\0\7\4\3\0" +
+            "\2\4\2\0\2\4\1\27\11\0\7\4\1\0\1\4" +
+            "\1\34\5\4\3\0\2\4\2\0\2\4\1\27\11\0" +
+            "\7\4\1\0\1\35\6\4\3\0\2\4\2\0\2\4" +
+            "\1\27\11\0\7\4\1\0\1\36\6\4\3\0\2\4" +
+            "\36\0\1\26\5\0\2\4\1\27\11\0\2\4\1\37" +
+            "\4\4\1\0\7\4\3\0\2\4\2\0\2\4\1\27" +
+            "\11\0\7\4\1\0\1\40\6\4\3\0\2\4\2\0" +
+            "\2\4\1\27\11\0\7\4\1\0\2\4\1\41\4\4" +
+            "\3\0\2\4\2\0\2\4\1\27\11\0\4\4\1\42" +
+            "\2\4\1\0\7\4\3\0\2\4\2\0\2\4\1\27" +
+            "\11\0\4\4\1\43\2\4\1\0\2\4\1\44\4\4" +
+            "\3\0\2\4\2\0\2\4\1\27\11\0\7\4\1\0" +
+            "\1\45\6\4\3\0\2\4\2\0\2\4\1\27\11\0" +
+            "\5\4\1\46\1\4\1\0\7\4\3\0\2\4\2\0" +
+            "\2\4\1\27\11\0\3\4\1\47\3\4\1\0\7\4" +
+            "\3\0\2\4\2\0\2\4\1\27\11\0\7\4\1\0" +
+            "\7\4\3\0\1\4\1\50\2\0\2\4\1\27\11\0" +
+            "\1\4\1\51\5\4\1\0\7\4\3\0\2\4\2\0" +
+            "\2\4\1\27\11\0\7\4\1\0\3\4\1\52\3\4" +
+            "\3\0\2\4\2\0\2\4\1\27\11\0\7\4\1\0" +
+            "\2\4\1\53\4\4\3\0\2\4\2\0\2\4\1\27" +
+            "\11\0\2\4\1\54\4\4\1\0\7\4\3\0\2\4" +
+            "\2\0\2\4\1\27\11\0\4\4\1\55\2\4\1\0" +
+            "\7\4\3\0\2\4\2\0\2\4\1\27\11\0\7\4" +
+            "\1\0\7\4\3\0\1\4\1\56\2\0\2\4\1\27" +
+            "\11\0\7\4\1\0\1\57\6\4\3\0\2\4\2\0" +
+            "\2\4\1\27\11\0\7\4\1\0\5\4\1\60\1\4" +
+            "\3\0\2\4\2\0\2\4\1\27\11\0\4\4\1\61" +
+            "\2\4\1\0\7\4\3\0\2\4\2\0\2\4\1\27" +
+            "\11\0\5\4\1\62\1\4\1\0\7\4\3\0\2\4" +
+            "\2\0\2\4\1\27\11\0\2\4\1\63\4\4\1\0" +
+            "\7\4\3\0\2\4\2\0\2\4\1\27\11\0\6\4" +
+            "\1\64\1\0\7\4\3\0\2\4\2\0\2\4\1\27" +
+            "\11\0\2\4\1\65\4\4\1\0\7\4\3\0\2\4";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[775];
+    int[] result = new int[1122];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -183,11 +200,11 @@ class Lexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\2\0\2\1\11\11\2\1\1\11\3\1\1\11\1\0"+
-    "\26\1";
+          "\2\0\2\1\11\11\3\1\1\11\4\1\1\11\1\0" +
+                  "\36\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[43];
+    int[] result = new int[53];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -300,7 +317,7 @@ class Lexer implements java_cup.runtime.Scanner {
     char [] map = new char[0x110000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
-    while (i < 138) {
+    while (i < 142) {
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -667,96 +684,127 @@ class Lexer implements java_cup.runtime.Scanner {
             { System.out.println("Found match NUM "+yytext()+" at line "+yyline+", column"+yycolumn);
         return symbols(sym.NUM, new Integer(yytext()));
             }
-          case 20: break;
+          case 22:
+            break;
           case 2: 
             { System.out.println("Found match N_VAR "+yytext()+" at line "+yyline+", column"+yycolumn);
         return symbols(sym.N_VAR, new String(yytext()));
             }
-          case 21: break;
+          case 23:
+            break;
           case 3: 
             { System.out.println("Found match LESS_THAN "+yytext()+" at line "+yyline+", column"+yycolumn);
           return symbols(sym.LESS_THAN);
             }
-          case 22: break;
+          case 24:
+            break;
           case 4: 
             { System.out.println("Found match COMMA "+yytext()+" at line "+yyline+", column"+yycolumn);
      	return symbols(sym.COMMA);
             }
-          case 23: break;
+          case 25:
+            break;
           case 5: 
             { System.out.println("Found match EQUALS "+yytext()+" at line "+yyline+", column"+yycolumn);
           	return symbols(sym.EQUALS);
             }
-          case 24: break;
+          case 26:
+            break;
           case 6: 
             { System.out.println("Found match LEFTPAR "+yytext()+" at line "+yyline+", column"+yycolumn);
      	return symbols(sym.LEFTPAR);
             }
-          case 25: break;
+          case 27:
+            break;
           case 7: 
             { System.out.println("Found match RIGHTPAR "+yytext()+" at line "+yyline+", column"+yycolumn);
         return symbols(sym.RIGHTPAR);
             }
-          case 26: break;
+          case 28:
+            break;
           case 8: 
             { System.out.println("Found match LEFTSQ "+yytext()+" at line "+yyline+", column"+yycolumn);
      	return symbols(sym.LEFTSQ);
             }
-          case 27: break;
+          case 29:
+            break;
           case 9: 
             { System.out.println("Found match RIGHTSQ "+yytext()+" at line "+yyline+", column"+yycolumn);
         return symbols(sym.RIGHTSQ);
             }
-          case 28: break;
+          case 30:
+            break;
           case 10: 
             { System.out.println("Found match LEFTBRACKET "+yytext()+" at line "+yyline+", column"+yycolumn);
         return symbols(sym.LEFTBRACKET);
             }
-          case 29: break;
+          case 31:
+            break;
           case 11: 
             { System.out.println("Found match RIGHTBRACKET "+yytext()+" at line "+yyline+", column"+yycolumn);
         return symbols(sym.RIGHTBRACKET);
             }
-          case 30: break;
+          case 32:
+            break;
           case 12: 
             { System.out.println("Found match END_OF_STATEMENT "+yytext()+" at line "+yyline+", column"+yycolumn);
             return symbols(sym.EOS, new String(yytext()));
             }
-          case 31: break;
+          case 33:
+            break;
           case 13: 
             { 
             }
-          case 32: break;
+          case 34:
+            break;
           case 14: 
             { System.out.println("Found match FOR "+yytext()+" at line "+yyline+", column"+yycolumn);
        return symbols(sym.FOR);
             }
-          case 33: break;
+          case 35:
+            break;
           case 15: 
             { System.out.println("Found match INT_TYPE "+yytext()+" at line "+yyline+", column"+yycolumn);
                 return symbols(sym.INT_TYPE);
             }
-          case 34: break;
+          case 36:
+            break;
           case 16: 
             { System.out.println("Found match READ "+yytext()+" at line "+yyline+", column"+yycolumn);
         return symbols(sym.READ);
             }
-          case 35: break;
-          case 17: 
+          case 37:
+            break;
+          case 17: {
+            System.out.println("Found match CLASS_BLOCK " + yytext() + " at line " + yyline + ", column" + yycolumn);
+            return symbols(sym.CLASS_BLOCK);
+          }
+          case 38:
+            break;
+          case 18: 
             { System.out.println("Found match ARRAY "+yytext()+" at line "+yyline+", column"+yycolumn);
         return symbols(sym.ARRAY);
             }
-          case 36: break;
-          case 18: 
+          case 39:
+            break;
+          case 19: {
+            System.out.println("Found match PRINT " + yytext() + " at line " + yyline + ", column" + yycolumn);
+            return symbols(sym.PRINT);
+          }
+          case 40:
+            break;
+          case 20: 
             { System.out.println("Found match RETURN "+yytext()+" at line "+yyline+", column"+yycolumn);
             return symbols(sym.RETURN);
             }
-          case 37: break;
-          case 19: 
+          case 41:
+            break;
+          case 21: 
             { System.out.println("Found match FUNCTION "+yytext()+" at line "+yyline+", column"+yycolumn);
         return symbols(sym.FUNCTION);
             }
-          case 38: break;
+          case 42:
+            break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

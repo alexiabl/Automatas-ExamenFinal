@@ -9,24 +9,25 @@ package ci1322.compiler;
 public class sym {
   /* terminals */
   public static final int READ = 4;
-  public static final int RIGHTBRACKET = 12;
-  public static final int LEFTSQ = 16;
-  public static final int LEFTPAR = 9;
-  public static final int N_VAR = 18;
+    public static final int RIGHTBRACKET = 13;
+    public static final int LEFTSQ = 17;
+    public static final int LEFTPAR = 10;
+    public static final int N_VAR = 19;
   public static final int RETURN = 6;
-  public static final int EOS = 14;
+    public static final int EOS = 15;
   public static final int FUNCTION = 3;
-  public static final int RIGHTPAR = 10;
-  public static final int NUM = 19;
-  public static final int EQUALS = 8;
-  public static final int COMMA = 7;
-  public static final int RIGHTSQ = 17;
+    public static final int RIGHTPAR = 11;
+    public static final int NUM = 20;
+    public static final int EQUALS = 9;
+    public static final int COMMA = 8;
+    public static final int RIGHTSQ = 18;
   public static final int EOF = 0;
-  public static final int LESS_THAN = 15;
-  public static final int LEFTBRACKET = 11;
-  public static final int PRINT = 20;
+    public static final int LESS_THAN = 16;
+    public static final int LEFTBRACKET = 12;
+    public static final int PRINT = 21;
   public static final int error = 1;
-  public static final int INT_TYPE = 13;
+    public static final int CLASS_BLOCK = 7;
+    public static final int INT_TYPE = 14;
   public static final int FOR = 2;
   public static final int ARRAY = 5;
   public static final String[] terminalNames = new String[] {
@@ -37,6 +38,7 @@ public class sym {
   "READ",
   "ARRAY",
   "RETURN",
+          "CLASS_BLOCK",
   "COMMA",
   "EQUALS",
   "LEFTPAR",

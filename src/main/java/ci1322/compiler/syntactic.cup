@@ -34,7 +34,7 @@ parser code {:
 
 // Terminales
 
-terminal FOR, FUNCTION, READ, ARRAY, RETURN;
+terminal FOR, FUNCTION, READ, ARRAY, RETURN, CLASS_BLOCK;
 terminal COMMA, EQUALS, LEFTPAR, RIGHTPAR, LEFTBRACKET, RIGHTBRACKET,INT_TYPE, EOS, LESS_THAN, LEFTSQ, RIGHTSQ;
 terminal String N_VAR;
 terminal Integer NUM;
@@ -54,27 +54,29 @@ nonterminal Call call;
 nonterminal Assignment multiVars;
 nonterminal Return return;
 nonterminal Container main;
+nonterminal Container class_block;
 
-//Reglas
-//como mandar la lista de variable
+
 //error si el numero en el metodo es diferente al numero de variables
 //validacion de existencia de variables
 //donde se solicita al usuario
-
+class_block::= CLASS_BLOCK LEFTBRACKET main:m RIGHTBRACKET {: RESULT = m; :};
 
 main::= function_vars:f main:m {: m.addToFunctions(f);
                                   RESULT = m; :}
-        | function_vars:f {: Container cont = new Container();
-                             cont.addToFunctions(f);
-                              RESULT = cont; :};
+//        | function_vars:f  {: Container cont = new Container();
+//                             cont.addToFunctions(f);
+//                              RESULT = cont; :}
+        | {: Container cont = new Container();
+                                        RESULT = cont; :};
 
-function_vars::= FUNCTION ARRAY N_VAR:n LEFTPAR N_VAR:p RIGHTPAR LEFTBRACKET block_func:b RIGHTBRACKET {: RESULT = new Function(TypesEnum.ARRAY,n,p,b.getDeclarations(),b.getInstructions()); :}
-                 | FUNCTION N_VAR:n LEFTPAR RIGHTPAR LEFTBRACKET block_func:b RIGHTBRACKET {: RESULT = new Function(n,b.getDeclarations(),b.getInstructions()); :};
+function_vars::= FUNCTION ARRAY N_VAR:n LEFTPAR NUM:p RIGHTPAR LEFTBRACKET block_func:b RIGHTBRACKET EOS {: RESULT = new Function(TypesEnum.ARRAY,n,p,b.getDeclarations(),b.getInstructions()); :}
+                 | FUNCTION N_VAR:n LEFTPAR RIGHTPAR LEFTBRACKET block_func:b RIGHTBRACKET EOS {: RESULT = new Function(n,b.getDeclarations(),b.getInstructions()); :};
 
 item::= N_VAR:n {: RESULT = new Item<String>(n); :}
        | NUM:n {: RESULT = new Item<Integer>(n); :};
 
-for::= FOR LEFTPAR item:min LESS_THAN item:max RIGHTPAR LEFTBRACKET instructions:i RIGHTBRACKET {: RESULT = new For(min,max,i); :};
+for::= FOR LEFTPAR item:min LESS_THAN item:max RIGHTPAR LEFTBRACKET instructions:i RIGHTBRACKET EOS {: RESULT = new For(min,max,i); :};
 
 instructions::= for:f instructions:i {: i.add(f);
                                          RESULT = i; :}
@@ -91,17 +93,20 @@ instructions::= for:f instructions:i {: i.add(f);
                 | read:r {: RESULT = new LinkedList<Instruction>();
                           RESULT.add(r); :}
                 | print:p {: RESULT = new LinkedList<Instruction>();
-                            RESULT.add(p); :};
+                            RESULT.add(p); :}
+                | return:r {: RESULT = new LinkedList<Instruction>();
+                                                        RESULT.add(r); :};
 
 assign_Vars::= multiVars:m EQUALS NUM:i EOS {: RESULT = new DirectAssignment(i,m.getIdentifiers()); :}
-               | multiVars:m EQUALS call:c EOS {: RESULT = new Call(c.getName(),c.getParam()); :};
+               | multiVars:m EQUALS call:c EOS {: RESULT = new Call(c.getName(),c.getParam(),m.getIdentifiers()); :};
 
 multiVars::= N_VAR:n COMMA multiVars:m {: m.addToIdentifiers(n);
                                           RESULT = m;  :}
-            | N_VAR:n {: RESULT = new Call();
-                        RESULT.addToIdentifiers(n); :};
+            | N_VAR:n {: Call call = new Call();
+                        call.addToIdentifiers(n);
+                        RESULT = call; :};
 
-read::= READ N_VAR:n EOS {: RESULT = new Read(n); :};
+read::= READ N_VAR:n LEFTSQ N_VAR RIGHTSQ EOS {: RESULT = new Read(n); :};
 
 print::= PRINT item:i EOS {: RESULT = new Print(i); :};
 

@@ -1,6 +1,7 @@
 package ci1322.compiler.structure.instructions;
 
 import ci1322.compiler.structure.Item;
+import ci1322.compiler.structure.SymbolsTable;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -46,5 +47,12 @@ public class For implements Instruction {
 
     public void setInstructions(List<Instruction> instructions) {
         this.instructions = instructions;
+    }
+
+    public void checkSymbolTable(SymbolsTable s) {
+        s.findVariableTable(this.min.getValue().toString());
+        for (Instruction i : this.instructions) {
+            i.checkSymbolTable(s);
+        }
     }
 }

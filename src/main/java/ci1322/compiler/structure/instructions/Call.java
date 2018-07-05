@@ -1,5 +1,7 @@
 package ci1322.compiler.structure.instructions;
 
+import ci1322.compiler.structure.SymbolsTable;
+
 import java.util.List;
 
 /**
@@ -44,5 +46,12 @@ public class Call extends Assignment {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void checkSymbolTable(SymbolsTable s) {
+        s.findFunctionTable(this.name);
+        for (String ids : this.getIdentifiers()) {
+            s.findVariableTable(ids);
+        }
     }
 }

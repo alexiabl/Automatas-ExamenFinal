@@ -7,4 +7,5 @@ import ci1322.compiler.structure.declaration.TypesEnum;
  */
 public interface Symbols {
 
+
 }

@@ -1,5 +1,7 @@
 package ci1322.compiler.structure.instructions;
 
+import ci1322.compiler.structure.SymbolsTable;
+
 import java.util.List;
 
 /**
@@ -20,5 +22,11 @@ public class DirectAssignment extends Assignment {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public void checkSymbolTable(SymbolsTable s) {
+        for (String vars : this.getIdentifiers()) {
+            s.findVariableTable(vars);
+        }
     }
 }
