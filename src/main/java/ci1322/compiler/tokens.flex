@@ -4,10 +4,11 @@ import java_cup.runtime.*;
 
 
 %%
-%cup
+
 %class Lexer
 %line
 %column
+%cup
 %{
 
     private Symbol symbols(int type) {
@@ -25,6 +26,7 @@ import java_cup.runtime.*;
 
 
 %}
+
 
 NUM =	-?[0-9]+
 N_VAR = ([a-z]|[A-Z])+((\_)*([a-z]|[A-Z]|[0-9])+)*

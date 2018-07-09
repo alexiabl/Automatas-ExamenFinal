@@ -15,10 +15,12 @@ public class Main {
     public static void main( String[] args )
     {
         try {
-            File file = new File("/Users/alexiaborchgrevink/Desktop/Automatas/ExamenFinal/final-exam-b51162/src/main/java/ci1322/compiler/input.txt");
-            parser parser = new parser(new Lexer(new FileReader(file)));
-            LexerErrors lexerErrors = new LexerErrors(new FileReader(file));
+            String directory = System.getProperty("user.dir");
+            String path = directory + "/" + args[0];
+            File file = new File(path);
+            LexerErrors lexerErrors = new LexerErrors(new FileReader(file.getPath()));
             lexerErrors.yylex();
+            parser parser = new parser(new Lexer(new FileReader(file.getPath())));
             Container container = (Container) parser.parse().value;
             SemanticAnalyzer semanticAnalyzer = new SemanticAnalyzer(container);
             semanticAnalyzer.validateNumVariables();

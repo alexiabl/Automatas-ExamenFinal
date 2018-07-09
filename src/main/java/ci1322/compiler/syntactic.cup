@@ -64,11 +64,10 @@ class_block::= CLASS_BLOCK LEFTBRACKET main:m RIGHTBRACKET {: RESULT = m; :};
 
 main::= function_vars:f main:m {: m.addToFunctions(f);
                                   RESULT = m; :}
-//        | function_vars:f  {: Container cont = new Container();
-//                             cont.addToFunctions(f);
-//                              RESULT = cont; :}
-        | {: Container cont = new Container();
-                                        RESULT = cont; :};
+        | function_vars:f  {: Container cont = new Container();
+                             cont.addToFunctions(f);
+                              RESULT = cont; :};
+    //    | {: RESULT = new Container(); :};
 
 function_vars::= FUNCTION ARRAY N_VAR:n LEFTPAR NUM:p RIGHTPAR LEFTBRACKET block_func:b RIGHTBRACKET EOS {: RESULT = new Function(TypesEnum.ARRAY,n,p,b.getDeclarations(),b.getInstructions()); :}
                  | FUNCTION N_VAR:n LEFTPAR RIGHTPAR LEFTBRACKET block_func:b RIGHTBRACKET EOS {: RESULT = new Function(n,b.getDeclarations(),b.getInstructions()); :};
